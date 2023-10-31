@@ -12,3 +12,9 @@ test('getSecondsLeftOfYear returns the correct amount of seconds', () => {
     expect(timeString).toBe(3600);
 });
 
+test('getTimeString returns the correct amount of digits', () => {
+    const now = new Date(0, 0, 0, 1, 2, 3);
+    const timeString = getTimeString(now);
+    expect(timeString).toBe('01:02:03');
+});
+

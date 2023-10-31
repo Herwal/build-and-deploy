@@ -1,7 +1,7 @@
 export const getTimeString = (now) => {
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const seconds = now.getSeconds();
+    const hour = now.getHours().toString().padStart(2, '0');
+    const minute = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
     return `${hour}:${minute}:${seconds}`
 }
 
