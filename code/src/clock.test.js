@@ -17,4 +17,3 @@ test('getTimeString returns the correct amount of digits', () => {
     const timeString = getTimeString(now);
     expect(timeString).toBe('01:02:03');
 });
-
