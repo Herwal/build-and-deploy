@@ -39,6 +39,13 @@ flowchart TD
 
 :pencil2: Inside `.github`, create a new folder called `workflows`.
 
+:book: The folder structure should look like this:
+
+```shell
+.github
+└── workflows
+```
+
 ### 2.2.1 GitHub Actions Hello World
 
 :book: Before we start doing anything useful with GitHub Actions, we need to get familiar with the basics of how it works.
@@ -57,7 +64,7 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
@@ -66,9 +73,17 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 ```
 
+:book: The folder structure should look like this:
+
+```shell
+.github
+└── workflows
+    └── test.yml
+```
+
 :pencil2: Save and git commit this file. Git push all your changes so far.
 
-:pencil2: Commiting the workflow file in your repository triggers the `push` event and runs your workflow.
+:book: Commiting the workflow file in your repository and pushing it to GitHub triggers the `push` event and runs your workflow.
 
 ### 2.3 Viewing your workflow results
 
@@ -114,9 +129,9 @@ npm run build
 
 :bulb: These commands are specific to the app we are building. If you need to build another type of app (Python, .NET, Java, etc.) in your pipeline, you need to use different build tools and commands.
 
-:pencil2: Remove the file `test.yml` we previously created from the `.github\workflows` folder.
+:pencil2: Delete the file `test.yml` we previously created from the `.github\workflows` folder.
 
-:pencil2: Add a new file called `main.yml` in the `.github\workflows` folder with the following contents:
+:pencil2: Create a new file called `main.yml` in the `.github\workflows` folder with the following contents:
 
 ```yml
 name: Build
@@ -131,11 +146,11 @@ jobs:
       run:
         working-directory: ./code
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: npm ci
       - run: npm run build
 ```
@@ -151,15 +166,20 @@ Let´s break down what this workflow does:
       - `run:` - settings for running commands
         - `working-directory: ./code` - set working directory for running commands to `./code`, where our app is located
     - `steps:`
-      - `- uses: actions/checkout@v3` - git clone the repository
-      - `- name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x` - install Node.js 16.x
+      - `- uses: actions/checkout@v4` - git clone the repository
+      - Install Node.js:
+
+      ```yml
+        - name: Use Node.js 22.x
+          uses: actions/setup-node@v4
+          with:
+            node-version: 22.x
+      ```
+
       - `- run: npm ci` - install dependencies
       - `run: npm run build` - build app
 
-:pencil2: Commit all changes and push them to git. The new workflow will now trigger.
+:pencil2: Commit all changes and push them to GitHub. The new workflow will now trigger.
 
 :pencil2: Open the GitHub Actions workflow overview and click on the new `Build` workflow on the left side. Click on the workflow run on the right side to see more details.
 
@@ -175,21 +195,28 @@ Let´s break down what this workflow does:
 
 Linting is just to verify that our code follows certain best practices and code conventions. We use the tool _[ESLint](https://eslint.org/)_ to do this for us. ESLint statistically analyzes your code to quickly find problems.
 
-:pencil2: Run `npm run lint` in your terminal to run ESLint. The command should take a few seconds, then exit without errors.
+:pencil2: In a terminal window, cd into the `code` folder and run `npm run lint` to run ESLint. The command should take a few seconds, then exit without errors.
 
-:pencil2: Open `code/src/main.js` and add the following line to the end of the file
+:pencil2: Open `code/src/main.js` and add the following line to the end of the file:
 
 ```javascript
 const unusedVariable = 3;
 ```
 
-:pencil2: Run `npm run lint` again. 
-You should see the following error on the screen
-```
-error  'unusedVariable' is assigned a value but never used  no-unused-vars
+:pencil2: Save the file, commit the change and run `npm run lint` again. You should see the following error on the screen:
+
+```shell
+> nerdschool-build-and-deploy@0.0.0 lint
+> eslint **/*.js
+
+
+<path-to-repo>/code/src/main.js
+  15:7  error  'unusedVariable' is assigned a value but never used  no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
 ```
 
-This is one of the quality checks we get with linting. We have a unused variable that is not used anywhere and does not provide any value, so the linter will give us feedback that the code is not up to the required standards. 
+This is one of the quality checks we get with linting. We have a unused variable that is not used anywhere and does not provide any value, so the linter will give us feedback that the code is not up to the required standards.
 This is an example of linting helping us enforce good coding practices.
 
 > All modern code editors and IDEs has plugins for ESLint so you get warnings and errors inline in your editor which is very helpful.
@@ -208,11 +235,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: npm ci
       - run: npm run build
 +     - run: npm run lint
@@ -243,11 +270,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: npm ci
       - run: npm run build
       - run: npm run lint
@@ -256,9 +283,9 @@ jobs:
 
 :pencil2: Git commit this change and push. View the result in the Actions workflow jobs overview on GitHub.com.
 
-:star: Bonus task: Try messing around with the tests. Can you make them fail? Or even create new tests that are run in our CI pipeline?
+:star: Bonus task: Try messing around with the tests in `code/src/clock.test.js`. Can you make them fail? Or even create new tests that are run in our CI pipeline?
 
-## Creating a build artifact
+## 2.6 Creating a build artifact
 
 Before we can start deploying anything to the internet, we need something to deploy. So far, we have checked that our code builds and that is passes our quality control checks through linting and testing. 
 
@@ -280,19 +307,19 @@ jobs:
       run:
         working-directory: ./code
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: npm ci
       - run: npm run build
       - run: npm run lint
       - run: npm run test
 
 +     - name: Archive artifacts
-+       uses: actions/upload-artifact@v3
++       uses: actions/upload-artifact@v4
 +       with:
 +         name: artifact
 +         path: ./code/dist

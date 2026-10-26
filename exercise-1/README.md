@@ -28,6 +28,12 @@ You will learn to:
 
 :pencil2: Install [Google Chrome](https://www.google.com/chrome/browser/desktop/) if you don't have it.
 
+### 1.1.3 Visual Studio Code and YAML extension
+
+:pencil2: Install [Visual Studio Code](https://code.visualstudio.com/).
+
+:pencil2: Install the [Red Hat YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) for Visual Studio Code.
+
 ### 1.2 GitHub account setup
 
 :pencil2: If you don't already have a GitHub account, follow the [Sign up for a new GitHub account](https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account) guide on GitHub.com. It's free!
@@ -36,12 +42,14 @@ You will learn to:
 
 ### 1.3 Installing git
 
+:book: Git is a command line tool for version control. It is used to manage and track changes in code.
+
 #### Checking for Git
 
 :pencil2: To see if you already have Git installed, open up your terminal application.
 
 * If you're on a Mac, look for a command prompt application called "Terminal".
-* If you're on a Windows machine, open the Windows command prompt or "Git Bash".
+* If you're on a Windows machine, open Windows Terminal or "Git Bash".
 
 Once you've opened your terminal application, type `git version`. The output will either tell you which version of Git is installed, or it will alert you that git is an unknown command. If it's an unknown command, follow the [Install Git](https://github.com/git-guides/install-git) guide.
 
@@ -56,8 +64,6 @@ If you are new to git, [GitHub Desktop](https://desktop.github.com/) is recommen
 * Git overview: [About Git](https://docs.github.com/en/get-started/using-git/about-git) on GitHub Docs
 * [Push commits to a remote](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) on GitHub Docs
 * [Get changes from a remote](https://docs.github.com/en/get-started/using-git/getting-changes-from-a-remote-repository) on GitHub Docs
-
-For more in depth learning, [Git-it](https://github.com/jlord/git-it-electron) is recommended.
 
 :book: Feel free to always ask the instructors for help, as git can be overwhelming for beginners.
 
@@ -117,6 +123,15 @@ code
 * `src` - contains the web app JavaScript code
 
 :pencil2: Run `npm start` in your terminal.
+
+:book: The following output should appear:
+
+```bash
+  VITE v3.2.11  ready in 92 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+```
 
 :pencil2: Open [http://localhost:5173](http://localhost:5173) in Chrome.
 

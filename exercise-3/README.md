@@ -36,7 +36,7 @@ You will learn:
 :book: To automatically deploy our web app to Azure when we push new commits to GitHub, we will create a new GitHub Actions workflow job.
 
 
-:pencil2: Open the `main.yaml` inside the `./github/workflows` directory with the following contents. 
+:pencil2: Open the file `main.yml` inside the `./github/workflows` directory and add the following content. 
 
 ```diff
 name: Build and deploy
@@ -50,19 +50,19 @@ jobs:
       run:
         working-directory: ./code
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: npm ci
       - run: npm run build
       - run: npm run lint
       - run: npm run test
 
       - name: Archive artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: ./code/dist
@@ -73,7 +73,7 @@ jobs:
 +   needs: build
 +   steps:
 +     - name: Get artifact from build step
-+       uses: actions/download-artifact@v3
++       uses: actions/download-artifact@v4
 +       with:
 +         name: artifact
 +     - name: Deploy
@@ -101,19 +101,19 @@ jobs:
       run:
         working-directory: ./code
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
       - run: npm ci
       - run: npm run build
       - run: npm run lint
       - run: npm run test
 
       - name: Archive artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifact
           path: ./code/dist
@@ -124,7 +124,7 @@ jobs:
     needs: build
     steps:
       - name: Get artifact from build step
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: artifact
       - name: Deploy
@@ -151,7 +151,7 @@ jobs:
 
 ### Making a change to the app
 
-:pencil2: Go to the `code/index.html` file and make a change to the file. E.g. you can change the heading of the page. Push the change to github, and see that the change is deployed to the live webpage after the Action has completed.
+:pencil2: Go to the `code/index.html` file and make a change to the file. E.g. you can change the heading of the page. Push the change to Github, and see that the change is deployed to the live webpage after the Action has completed.
 
 ```diff
 <!DOCTYPE html>
